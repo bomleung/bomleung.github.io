@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="let和var在JavaScript中都是用来定义变量的，但它们之间有许多不同的地方。 作用域不同 let的作用域限定在定义它的代码块里面，外部无法访问。 var的作用域在它被定义之后会被提升到作用域顶部，无论它的定义嵌套有多深，最外层的函数都可以访问。  123456789101112131415161718192021function varcode()&amp;#123;	var x&#x3D;1;		if(">
+<meta name="description" content="闭包的概念在JavaScript中，函数内部可以读取全局变量，而外部无法读取函数的局部变量。 12345678var n&#x3D;999function code1()&amp;#123;	console.log(n);	&#x2F;&#x2F;输出999&amp;#125;function code2()&amp;#123;	var k&#x3D;100;&amp;#125;alert(k); &#x2F;&#x2F;error  ​		在有些情况下，需要得到函数内部的局部变量，这是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="let和var的比较">
-<meta property="og:url" content="http://example.com/posts/44661.html">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://example.com/posts/7415.html">
 <meta property="og:site_name" content="bomleung">
-<meta property="og:description" content="let和var在JavaScript中都是用来定义变量的，但它们之间有许多不同的地方。 作用域不同 let的作用域限定在定义它的代码块里面，外部无法访问。 var的作用域在它被定义之后会被提升到作用域顶部，无论它的定义嵌套有多深，最外层的函数都可以访问。  123456789101112131415161718192021function varcode()&amp;#123;	var x&#x3D;1;		if(">
+<meta property="og:description" content="闭包的概念在JavaScript中，函数内部可以读取全局变量，而外部无法读取函数的局部变量。 12345678var n&#x3D;999function code1()&amp;#123;	console.log(n);	&#x2F;&#x2F;输出999&amp;#125;function code2()&amp;#123;	var k&#x3D;100;&amp;#125;alert(k); &#x2F;&#x2F;error  ​		在有些情况下，需要得到函数内部的局部变量，这是">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-31T07:57:10.000Z">
-<meta property="article:modified_time" content="2023-05-31T08:12:52.416Z">
+<meta property="article:published_time" content="2023-05-31T09:14:44.000Z">
+<meta property="article:modified_time" content="2023-05-31T09:32:26.979Z">
 <meta property="article:author" content="bomleung">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/posts/44661.html"/>
+  <link rel="canonical" href="http://example.com/posts/7415.html"/>
 
 
 
 
 
-  <title>let和var的比较 | bomleung</title>
+  <title>闭包 | bomleung</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/posts/44661.html">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/7415.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">let和var的比较</h1>
+          <h1 class="post-title" itemprop="name headline">闭包</h1>
         
 
         <div class="post-meta">
@@ -292,7 +292,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-05-31T15:57:10+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-05-31T17:14:44+08:00">
                 2023-05-31
               </time>
             
@@ -324,7 +324,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  322
+                  388
                 </span>
               
 
@@ -361,20 +361,19 @@
       
 
       
-        <p><code>let</code>和<code>var</code>在JavaScript中都是用来定义变量的，但它们之间有许多不同的地方。</p>
-<h2 id="作用域不同"><a href="#作用域不同" class="headerlink" title="作用域不同"></a>作用域不同</h2><ol>
-<li><code>let</code>的作用域限定在定义它的代码块里面，外部无法访问。</li>
-<li><code>var</code>的作用域在它被定义之后会被提升到作用域顶部，无论它的定义嵌套有多深，最外层的函数都可以访问。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function varcode()&#123;</span><br><span class="line">	var x=1;</span><br><span class="line">	</span><br><span class="line">	if(true)&#123;</span><br><span class="line">		var x=2;</span><br><span class="line">		console.log(x);	//输出 2</span><br><span class="line">	&#125;</span><br><span class="line">	console.log(x);	//输出2，因为x的作用域已被提升到最高，整个函数都是使用一个x变量</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function letcode()&#123;</span><br><span class="line">	let x=1;</span><br><span class="line">	</span><br><span class="line">	if(true)&#123;</span><br><span class="line">		let x=2;</span><br><span class="line">		console.log(x);	//输出2</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	console.log(x);	//输出1,外层函数无法访问内部由let定义的x</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <h2 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h2><p>在JavaScript中，函数内部可以读取全局变量，而外部无法读取函数的局部变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var n=999</span><br><span class="line">function code1()&#123;</span><br><span class="line">	console.log(n);	//输出999</span><br><span class="line">&#125;</span><br><span class="line">function code2()&#123;</span><br><span class="line">	var k=100;</span><br><span class="line">&#125;</span><br><span class="line">alert(k); //error</span><br></pre></td></tr></table></figure>
 
-<p>​		为了避免出现错误，定义变量的时候最好使用<code>let</code>来定义，使变量的作用域更加明确。</p>
-<h2 id="全局变量不同"><a href="#全局变量不同" class="headerlink" title="全局变量不同"></a>全局变量不同</h2><ol>
-<li><code>let</code>定义的变量在所有函数的外部时，它不会赋给全局对象。</li>
-<li><code>var</code>定义的变量在所有函数的外部时，该变量会赋给全局对象，该变量为全局变量。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let x=1;</span><br><span class="line">var y=1;</span><br><span class="line">console.log(this.x);	//输出error,因为this指向的全局对象没有x变量</span><br><span class="line">console.log(this.y);	//输出1</span><br></pre></td></tr></table></figure>
+<p>​		在有些情况下，需要得到函数内部的局部变量，这是只有通过在函数内部再定义一个函数才可以做到。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function code1()&#123;</span><br><span class="line">	var n=999;</span><br><span class="line">	</span><br><span class="line">	function code2()&#123;</span><br><span class="line">		alert(n);</span><br><span class="line">	&#125;</span><br><span class="line">	return code2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result=code1();</span><br><span class="line">result();	//输出999</span><br></pre></td></tr></table></figure>
 
+<p>​		code1()的局部变量对于code2()来说都是可见的，把code2作为返回值，外部就可以读取code1()内部的局部变量。</p>
+<p>​		闭包实际上就是一个定义在函数内部的函数，使得函数外部可以访问函数内部的局部变量。</p>
+<h2 id="闭包的作用"><a href="#闭包的作用" class="headerlink" title="闭包的作用"></a>闭包的作用</h2><ol>
+<li>使得外部可以读取函数内部的变量；</li>
+<li>让变量一直保存在内存里。<br> 什么叫做使变量一直保存在内存里呢?请看接下来的代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function code1()&#123;</span><br><span class="line">	var k=1;</span><br><span class="line">	</span><br><span class="line">	inc=function()&#123;k++&#125;;	//没有使用var或let定义，它是全局变量</span><br><span class="line">	</span><br><span class="line">	function code2()&#123;</span><br><span class="line">		alert(k);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	return code2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var r1=code1();</span><br><span class="line">r1();	//1</span><br><span class="line">inc();</span><br><span class="line">r1();	//2</span><br></pre></td></tr></table></figure>
+ r1就是闭包code函数，它运行了两次,一次输出为，一次为2，说明code1()的局部变量k一直在内存中。<br> 原因是code1()为code2()的父函数，code2的存在依赖于code1,而code1被赋给了r1这个全局变量，所以code2一直在内存中，随之code1也一直在内存中，不会在调用之后就被回收。</li>
+</ol>
 
       
     </div>
@@ -420,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/41282.html" rel="next" title="test_post">
-                <i class="fa fa-chevron-left"></i> test_post
+              <a href="/posts/44661.html" rel="next" title="let和var的比较">
+                <i class="fa fa-chevron-left"></i> let和var的比较
               </a>
             
           </div>
@@ -429,10 +428,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/7415.html" rel="prev" title="闭包">
-                闭包 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8D%E5%90%8C"><span class="nav-number">1.</span> <span class="nav-text">作用域不同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E4%B8%8D%E5%90%8C"><span class="nav-number">2.</span> <span class="nav-text">全局变量不同</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">闭包的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">闭包的作用</span></a></li></ol></div>
             
 
           </div>

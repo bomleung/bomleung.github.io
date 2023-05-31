@@ -49,4 +49,25 @@
         <tag>JavaScript</tag>
       </tags>
   </entry>
+  <entry>
+    <title>闭包</title>
+    <url>/posts/7415.html</url>
+    <content><![CDATA[<h2 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h2><p>在JavaScript中，函数内部可以读取全局变量，而外部无法读取函数的局部变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var n=999</span><br><span class="line">function code1()&#123;</span><br><span class="line">	console.log(n);	//输出999</span><br><span class="line">&#125;</span><br><span class="line">function code2()&#123;</span><br><span class="line">	var k=100;</span><br><span class="line">&#125;</span><br><span class="line">alert(k); //error</span><br></pre></td></tr></table></figure>
+
+<p>​		在有些情况下，需要得到函数内部的局部变量，这是只有通过在函数内部再定义一个函数才可以做到。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function code1()&#123;</span><br><span class="line">	var n=999;</span><br><span class="line">	</span><br><span class="line">	function code2()&#123;</span><br><span class="line">		alert(n);</span><br><span class="line">	&#125;</span><br><span class="line">	return code2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result=code1();</span><br><span class="line">result();	//输出999</span><br></pre></td></tr></table></figure>
+
+<p>​		code1()的局部变量对于code2()来说都是可见的，把code2作为返回值，外部就可以读取code1()内部的局部变量。</p>
+<p>​		闭包实际上就是一个定义在函数内部的函数，使得函数外部可以访问函数内部的局部变量。</p>
+<h2 id="闭包的作用"><a href="#闭包的作用" class="headerlink" title="闭包的作用"></a>闭包的作用</h2><ol>
+<li>使得外部可以读取函数内部的变量；</li>
+<li>让变量一直保存在内存里。<br> 什么叫做使变量一直保存在内存里呢?请看接下来的代码<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function code1()&#123;</span><br><span class="line">	var k=1;</span><br><span class="line">	</span><br><span class="line">	inc=function()&#123;k++&#125;;	//没有使用var或let定义，它是全局变量</span><br><span class="line">	</span><br><span class="line">	function code2()&#123;</span><br><span class="line">		alert(k);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	return code2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var r1=code1();</span><br><span class="line">r1();	//1</span><br><span class="line">inc();</span><br><span class="line">r1();	//2</span><br></pre></td></tr></table></figure>
+ r1就是闭包code函数，它运行了两次,一次输出为，一次为2，说明code1()的局部变量k一直在内存中。<br> 原因是code1()为code2()的父函数，code2的存在依赖于code1,而code1被赋给了r1这个全局变量，所以code2一直在内存中，随之code1也一直在内存中，不会在调用之后就被回收。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
 </search>
