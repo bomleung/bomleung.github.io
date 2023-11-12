@@ -1,1 +1,1 @@
-[{"title":"测试文章","date":"2023-11-12T09:32:40.000Z","path":"2023/11/12/test/","tags":[{"name":"test","slug":"test","permalink":"https://bomleung.github.io/tags/test/"}]},{"title":"Hello World","date":"2023-11-12T09:29:33.593Z","path":"2023/11/12/hello-world/","tags":[]}]
+[{"title":"测试文章","date":"2023-11-12T09:32:40.000Z","path":"2023/11/12/test/","tags":[{"name":"test","slug":"test","permalink":"http://example.com/tags/test/"}]},{"title":"Hello World","date":"2023-11-12T09:29:33.593Z","path":"2023/11/12/hello-world/","tags":[]}]
